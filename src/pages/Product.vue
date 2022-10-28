@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { IBudInfo } from "../types/bud-info.interface";
-import { NProgress, NCard, NDivider } from "naive-ui";
+import { NProgress, NCard, NDivider, NButton } from "naive-ui";
 
 const sampleData: IBudInfo = {
   name: "Green Crack",
@@ -11,12 +11,15 @@ const sampleData: IBudInfo = {
   cbgPercent: 1,
   flavor: "mango",
   mostEffect: "enegertic",
-  strainEffects: { feelings: [], negatives: [] },
+  strainEffects: {
+    feelings: ["energatic", "focused", "talkative"],
+    negatives: ["paranoid", "anxios", "dry eyes"],
+  },
   strainFalvors: ["mango", "citrus", "tropical"],
   helpWith: {
-    anxiety: "",
-    depression: "",
-    stress: "",
+    anxiety: "28% of people say it helps with anxiety",
+    depression: "29% of people say it helps with depression",
+    stress: "35% of people say it helps with stress",
   },
   effectRate: 99,
   images: [
@@ -30,6 +33,7 @@ const sampleData: IBudInfo = {
 };
 
 const selectedPic = ref<string>("");
+const selectedEffectType = ref("feelings");
 
 onMounted(() => {
   if (sampleData?.images?.length) {
@@ -39,7 +43,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="max-w-[1440px] mx-auto p-4">
-    <div class="sticky top-20 text-left" @click="$router.back()">
+    <div class="text-left" @click="$router.back()">
       <p class="cursor-pointer">Back</p>
     </div>
     <div class="grid sm:grid-cols-2 place-items-center sm:place-items-start">
@@ -105,30 +109,95 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="w-full flex flex-row">
-      <div class="w-full">
-        <div class="w-full text-left mx-auto">
-          <p class="text-2xl">strain effects</p>
-          <div></div>
-        </div>
-        <div class="w-full text-left mx-auto">
-          <p class="text-2xl">Strain flavors</p>
-          <div class="flex flex-row gap-4">
-            <NCard
-              size="small"
-              class="shadow-md text-center"
-              v-for="x in sampleData.strainFalvors"
-            >
-              <div>
-                <p>{{ x }}</p>
+
+    <div class="grid md:grid-cols-2">
+      <div>
+        <div class="w-full">
+          <div class="w-full text-left mx-auto mt-6">
+            <p class="text-2xl">Strain effects</p>
+            <div class="lg:hidden mb-4 text-center">
+              <div class="flex flex-row gap-5">
+                <NButton
+                  @click="selectedEffectType = 'feelings'"
+                  class="text-black"
+                  :type="
+                    selectedEffectType === 'feelings' ? 'success' : 'default'
+                  "
+                  >feelings</NButton
+                >
+
+                <NButton
+                  @click="selectedEffectType = 'negatives'"
+                  class="text-black"
+                  :type="
+                    selectedEffectType !== 'feelings' ? 'primary' : 'default'
+                  "
+                  >negatives</NButton
+                >
               </div>
-            </NCard>
+              <div class="flex gap-4 my-4">
+                <NCard
+                  size="small"
+                  class="shadow-md"
+                  v-for="x in sampleData.strainEffects[selectedEffectType]"
+                >
+                  {{ x }}</NCard
+                >
+              </div>
+            </div>
+            <div class="hidden lg:block my-4 text-center">
+              <p class="text-left">feelings</p>
+              <div class="flex flex-row gap-3">
+                <NCard
+                  size="small"
+                  class="shadow-md"
+                  v-for="x in sampleData.strainEffects.feelings"
+                >
+                  {{ x }}</NCard
+                >
+              </div>
+              <p class="mt-4 text-left">negatives</p>
+              <div class="flex flex-row gap-3">
+                <NCard
+                  size="small"
+                  class="shadow-md"
+                  v-for="x in sampleData.strainEffects.feelings"
+                >
+                  {{ x }}</NCard
+                >
+              </div>
+            </div>
+          </div>
+          <div class="w-full text-left mx-auto">
+            <p class="text-2xl">Strain flavors</p>
+            <div class="flex flex-row gap-4">
+              <NCard
+                size="small"
+                class="shadow-md text-center"
+                v-for="flavor in sampleData.strainFalvors"
+              >
+                <div>
+                  <p>{{ flavor }}</p>
+                </div>
+              </NCard>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <NDivider vertical></NDivider>
-        asdas
+      <div class="mt-6 text-left md:ml-4">
+        <p class="text-2xl">{{ sampleData.name }} helps with</p>
+        <div class="my-4">
+          <p class="text-lg underline">Stress</p>
+          <p>{{ sampleData.helpWith.stress }}</p>
+        </div>
+        <div class="my-4">
+          <p class="text-lg underline">Depression</p>
+          <p>{{ sampleData.helpWith.depression }}</p>
+        </div>
+        <div>
+          <p class="text-lg underline">Anxiety</p>
+          <p>{{ sampleData.helpWith.anxiety }}</p>
+        </div>
       </div>
     </div>
   </div>
