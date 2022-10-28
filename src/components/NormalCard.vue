@@ -48,7 +48,7 @@ defineProps({ cardData: Object as () => ICardNormal });
       <img
         :src="cardData?.url"
         alt=""
-        class="max-w-[20rem] w-full h-[18rem] image-round"
+        class="max-w-[20rem] w-full h-[15rem] sm:h-[18rem] image-round"
       />
     </div>
     <div class="ml-2 md:ml-0 flex flex-wrap justify-between flex-col">
