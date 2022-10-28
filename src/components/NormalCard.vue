@@ -5,7 +5,7 @@ import { onMounted, onUnmounted, ref, watchEffect } from "vue";
 export interface ICardNormal {
   url?: string;
   tag?: string;
-  productName?: string;
+  productName: string;
   aka?: string;
   type: string;
   percentages: string[];
@@ -48,7 +48,7 @@ defineProps({ cardData: Object as () => ICardNormal });
       <img
         :src="cardData?.url"
         alt=""
-        class="max-w-[20rem] w-full h-[15rem] image-round"
+        class="max-w-[20rem] w-full h-[18rem] image-round"
       />
     </div>
     <div class="ml-2 md:ml-0 flex flex-wrap justify-between flex-col">
