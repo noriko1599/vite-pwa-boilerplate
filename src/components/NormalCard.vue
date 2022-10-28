@@ -94,12 +94,12 @@ defineProps({ cardData: Object as () => ICardNormal });
 </template>
 <style lang="scss" scoped>
 .glass {
-  background: rgba(255, 255, 255, 0.68);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(1.6px);
-  -webkit-backdrop-filter: blur(1.6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(89, 95, 89, 0.3);
 }
 .image-round {
   border-radius: 25px 25px 0 0;
