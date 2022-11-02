@@ -5,7 +5,10 @@
 
 html,
 body {
+    background: url('/images/testbg.png') repeat-y;
+    background-size: cover;
     background-color: #e4f2e4;
     color: white;
     font-family: "Noto Sans Thai", sans-serif;
+
 }
