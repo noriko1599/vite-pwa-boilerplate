@@ -9,11 +9,15 @@ import {
 } from "naive-ui";
 import { Bars, Search } from "@vicons/fa";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const showDrawer = ref<boolean>(false);
 const data = [
   { key: "sativa", label: "sativa", children: [{ label: "green crack" }] },
 ];
+
+const router = useRouter()
+
 </script>
 <template>
   <nav class="sticky top-0 p-4 bg-[#e4f2e4] opacity-95 z-10 shadow-sm">
@@ -26,7 +30,7 @@ const data = [
           </template>
         </n-input>
       </div>
-      <div class="hidden lg:flex justify-end ml-auto">
+      <div class="hidden lg:flex justify-end ml-auto" @click="router.push('/how-to-send-to-lab')">
         <p>วิธีการส่งตรวจ</p>
       </div>
       <div class="text-xl capitalize">
@@ -43,7 +47,7 @@ const data = [
       </n-input>
       <div class="flex flex-row gap-2 mt-2">
         <button
-          class="p-2 bg-green-300 rounded-3xl text-white hover:border-white hover:border"
+          class="p-2 bg-green-300 rounded-3xl text-white hover:border-white hover:border" @click="router.push('/how-to-send-to-lab')"
         >
           วิธีการส่งตรวจ
         </button>

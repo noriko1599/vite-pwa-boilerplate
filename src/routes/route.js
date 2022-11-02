@@ -11,6 +11,10 @@ export const routes = [
         path: "/product/:productName",
         component: () => import("../pages/Product.vue"),
       },
+      {
+        path: "/how-to-send-to-lab",
+        component: () => import("../pages/HowToSendToLab.vue"),
+      },
     ],
   },
 ];
