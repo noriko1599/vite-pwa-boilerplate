@@ -12,8 +12,12 @@ export const routes = [
         component: () => import("../pages/Product.vue"),
       },
       {
-        path: "/how-to-send-to-lab",
+        path: "/send-to-lab",
         component: () => import("../pages/HowToSendToLab.vue"),
+      },
+      {
+        path: "/search",
+        component: () => import("../pages/Search.vue"),
       },
     ],
   },

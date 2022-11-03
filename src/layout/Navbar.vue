@@ -16,41 +16,78 @@ const data = [
   { key: "sativa", label: "sativa", children: [{ label: "green crack" }] },
 ];
 
-const router = useRouter()
-
+const router = useRouter();
 </script>
 <template>
   <nav class="sticky top-0 p-4 bg-[#e4f2e4] opacity-95 z-10 shadow-sm">
     <div class="max-w-[1440px] flex justify-between mx-auto items-center gap-6">
-      <div class="uppercase text-xl">thai cannbis hub</div>
-      <div class="hidden lg:block">
+      <div class="uppercase text-xl">thai cannabis hub by ฟาร์มกัญชง เจเจ</div>
+      <!-- <div class="hidden lg:block">
         <n-input round placeholder="search">
           <template #suffix>
             <n-icon :component="Search" />
           </template>
         </n-input>
+      </div> -->
+      <div
+        class="hidden lg:flex gap-2 justify-end ml-auto"
+      >
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/')"
+          >ผลตรวจทั้งหมด</NButton
+        >
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/search')"
+          >ค้นหาผลตรวจ</NButton
+        >
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/send-to-lab')"
+          >ส่งตรวจ</NButton
+        >
       </div>
-      <div class="hidden lg:flex justify-end ml-auto" @click="router.push('/how-to-send-to-lab')">
-        <p>วิธีการส่งตรวจ</p>
-      </div>
-      <div class="text-xl capitalize">
+      <!-- <div class="text-xl capitalize">
         <NIcon class="lg:hidden" @click="showDrawer = !showDrawer">
           <Bars class="w-8 h-8"></Bars>
         </NIcon>
-      </div>
+      </div> -->
     </div>
     <div class="lg:hidden mt-2">
-      <n-input round placeholder="search">
+      <!-- <n-input round placeholder="search">
         <template #suffix>
           <n-icon :component="Search" />
         </template>
-      </n-input>
+      </n-input> -->
       <div class="flex flex-row gap-2 mt-2">
-        <button
-          class="p-2 bg-green-300 rounded-3xl text-white hover:border-white hover:border" @click="router.push('/how-to-send-to-lab')"
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/')"
+          >ผลตรวจทั้งหมด</NButton
         >
-          วิธีการส่งตรวจ
-        </button>
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/search')"
+          >ค้นหาผลตรวจ</NButton
+        >
+        <NButton
+          class="rounded-[25px]"
+          style="color: green"
+          type="primary"
+          @click="router.push('/send-to-lab')"
+          >ส่งตรวจ</NButton
+        >
       </div>
     </div>
   </nav>

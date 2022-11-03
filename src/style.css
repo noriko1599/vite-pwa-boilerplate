@@ -5,10 +5,19 @@
 
 html,
 body {
-    background: url('/images/testbg.png') repeat-y;
-    background-size: cover;
-    background-color: #e4f2e4;
-    color: white;
-    font-family: "Noto Sans Thai", sans-serif;
+  background: url("/images/testbg.png") repeat-y;
+  background-size: cover;
+  background-color: #e4f2e4;
+  color: white;
+  font-family: "Noto Sans Thai", sans-serif;
+}
 
+.glass-card {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

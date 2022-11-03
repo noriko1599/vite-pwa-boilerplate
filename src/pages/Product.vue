@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { IBudInfo } from "../types/bud-info.interface";
 import { NProgress, NCard, NDivider, NButton } from "naive-ui";
+import { TitleCaseWord } from "../utils/title-case-word";
 
 const sampleData: IBudInfo = {
   name: "Green Crack",
@@ -29,7 +30,7 @@ const sampleData: IBudInfo = {
     "https://leafly-public.imgix.net/strains/reviews/photos/green-crack__primary_14a0.jpg?auto=compress,format&w=295&dpr=1",
   ],
   description:
-    'also known as "Green Crush" and "Mango Crack," is a potent sativa marijuana strain made by crossing Skunk #1 with an unknown indica. This strain is beloved by many consumers for its energizing effects. But don’t let the name fool you: this is pure cannabis. Few strains compare to Green Crack’s sharp energy and focus as it induces an invigorating mental buzz that keeps you going throughout the day. With a tangy, fruity flavor redolent of mango, Green Crack is a great daytime strain that may help consumers fight fatigue, stress, and depression. Because the name "Green Crack" perpetuates a negative image of cannabis, some people have taken to calling this strain Cush (with a ‘C’) or Green Cush instead.',
+    'Green Crack, also known as "Green Crush" and "Mango Crack," is a potent sativa marijuana strain made by crossing Skunk #1 with an unknown indica. This strain is beloved by many consumers for its energizing effects. But don’t let the name fool you: this is pure cannabis. Few strains compare to Green Crack’s sharp energy and focus as it induces an invigorating mental buzz that keeps you going throughout the day. With a tangy, fruity flavor redolent of mango, Green Crack is a great daytime strain that may help consumers fight fatigue, stress, and depression. Because the name "Green Crack" perpetuates a negative image of cannabis, some people have taken to calling this strain Cush (with a ‘C’) or Green Cush instead.',
 };
 
 const selectedPic = ref<string>("");
@@ -43,9 +44,6 @@ onMounted(() => {
 </script>
 <template>
   <div class="max-w-[1440px] mx-auto p-4">
-    <div class="text-left" @click="$router.back()">
-      <p class="cursor-pointer">Back</p>
-    </div>
     <div class="grid sm:grid-cols-2 place-items-center sm:place-items-start">
       <div
         class="flex justify-center sm:justify-start flex-wrap mx-auto"
@@ -92,20 +90,24 @@ onMounted(() => {
         </div>
         <div class="flex flex-row gap-6 my-6 justify-around">
           <div class="w-full">
-            <div class="shadow-md rounded-md p-">
-              <span>flavor & aroma</span>
-              <p class="underline">{{ sampleData.flavor }}</p>
+            <div class="p-2 glass-card">
+              <span>Flavor & Aroma</span>
+              <p class="underline">{{ TitleCaseWord(sampleData.flavor) }}</p>
             </div>
           </div>
           <div class="w-full">
-            <div class="shadow-md rounded-md p-">
-              <span>top effect</span>
-              <p class="underline">{{ sampleData.mostEffect }}</p>
+            <div class="p-2 glass-card">
+              <span>Top Effect</span>
+              <p class="underline">
+                {{ TitleCaseWord(sampleData.mostEffect) }}
+              </p>
             </div>
           </div>
         </div>
         <div class="text-justify">
-          <p>{{ sampleData.name }}, {{ sampleData.description }}</p>
+          <div class="p-4 glass-card">
+            <p>{{ sampleData.description }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -119,67 +121,67 @@ onMounted(() => {
               <div class="flex flex-row gap-5">
                 <NButton
                   @click="selectedEffectType = 'feelings'"
-                  class="text-black"
+                  class="text-black rounded-[25px]"
                   :type="
                     selectedEffectType === 'feelings' ? 'success' : 'default'
                   "
-                  >feelings</NButton
+                  style="color: green"
+                  >Feelings</NButton
                 >
 
                 <NButton
                   @click="selectedEffectType = 'negatives'"
-                  class="text-black"
+                  class="text-black rounded-[25px]"
                   :type="
                     selectedEffectType !== 'feelings' ? 'primary' : 'default'
                   "
-                  >negatives</NButton
+                  style="color: green"
+                  >Negatives</NButton
                 >
               </div>
               <div class="flex gap-4 my-4">
-                <NCard
-                  size="small"
-                  class="shadow-md"
-                  v-for="x in sampleData.strainEffects[selectedEffectType]"
+                <div
+                  v-for="(x, i) in sampleData.strainEffects[selectedEffectType]"
+                  :key="i"
+                  class="p-4 glass-card w-full text-center"
                 >
-                  {{ x }}</NCard
-                >
+                  <p>{{ TitleCaseWord(x) }}</p>
+                </div>
               </div>
             </div>
             <div class="hidden lg:block my-4 text-center">
               <p class="text-left">feelings</p>
               <div class="flex flex-row gap-3">
-                <NCard
-                  size="small"
-                  class="shadow-md"
-                  v-for="x in sampleData.strainEffects.feelings"
+                <div
+                  v-for="(feeling, i) in sampleData.strainEffects.feelings"
+                  :key="i"
+                  class="p-4 glass-card w-full text-center"
                 >
-                  {{ x }}</NCard
-                >
+                  <p>{{ TitleCaseWord(feeling) }}</p>
+                </div>
               </div>
               <p class="mt-4 text-left">negatives</p>
               <div class="flex flex-row gap-3">
-                <NCard
-                  size="small"
-                  class="shadow-md"
-                  v-for="x in sampleData.strainEffects.feelings"
+                <div
+                  v-for="(negative, i) in sampleData.strainEffects.negatives"
+                  :key="i"
+                  class="p-4 glass-card w-full text-center"
                 >
-                  {{ x }}</NCard
-                >
+                  <p>{{ TitleCaseWord(negative) }}</p>
+                </div>
               </div>
             </div>
           </div>
           <div class="w-full text-left mx-auto">
             <p class="text-2xl">Strain flavors</p>
-            <div class="flex flex-row gap-4">
-              <NCard
-                size="small"
-                class="shadow-md text-center"
-                v-for="flavor in sampleData.strainFalvors"
+            <div class="flex flex-row gap-3">
+              <div
+                v-for="(flavor, i) in sampleData.strainFalvors"
+                :key="i"
+                class="p-4 glass-card w-full text-center"
               >
-                <div>
-                  <p>{{ flavor }}</p>
-                </div>
-              </NCard>
+                <p>{{ TitleCaseWord(flavor) }}</p>
+              </div>
             </div>
           </div>
         </div>
